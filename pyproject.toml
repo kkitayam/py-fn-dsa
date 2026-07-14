@@ -37,7 +37,7 @@ artifacts = [
 packages = ["src/py_fn_dsa"]
 
 [tool.hatch.build.hooks.custom]
-path = "build.py"
+path = "hatch_build.py"
 
 [project.urls]
 Repository = "https://github.com/kkitayam/py-fn-dsa"
@@ -49,4 +49,5 @@ python_files = ["test_*.py"]
 [tool.cibuildwheel]
 build-verbosity = 1
 skip = "pp* *-musllinux_*"
+test-requires = ["pytest>=8"]
 test-command = "pytest {project}/tests"
