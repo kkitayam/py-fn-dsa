@@ -1,0 +1,3 @@
+[submodule "vendor/c-fn-dsa"]
+	path = vendor/c-fn-dsa
+	url = https://github.com/pornin/c-fn-dsa.git
