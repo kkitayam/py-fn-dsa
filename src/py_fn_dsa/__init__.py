@@ -194,11 +194,11 @@ def _calc_sign_key_size(logn: int) -> int:
     """Calculate signing key size for given logn.
     
     Formula from fndsa.h:
-    FNDSA_SIGN_KEY_SIZE(logn) = 1 + ((12 - indicators) << (logn - 2))
+    FNDSA_SIGN_KEY_SIZE(logn) = 65 + ((12 - indicators) << (logn - 2))
     where indicators = (logn>=6) + (logn>=8) + (logn>=10)
     """
     indicators = sum([logn >= n for n in [6, 8, 10]])
-    return 1 + ((12 - indicators) << (logn - 2))
+    return 65 + ((12 - indicators) << (logn - 2))
 
 
 def _calc_vrfy_key_size(logn: int) -> int:

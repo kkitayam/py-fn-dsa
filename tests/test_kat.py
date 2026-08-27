@@ -16,7 +16,7 @@ from py_fn_dsa import (
 
 def _sign_key_size(logn: int) -> int:
     indicators = sum(logn >= threshold for threshold in (6, 8, 10))
-    return 1 + ((12 - indicators) << (logn - 2))
+    return 65 + ((12 - indicators) << (logn - 2))
 
 
 def _vrfy_key_size(logn: int) -> int:
@@ -67,13 +67,13 @@ def _signature_from_seed(signing_key: SigningKey, message: bytes, context: bytes
 def test_seeded_keygen_kat_512():
     verify_key, signing_key = _key_material_from_seed(LOGN_512, b"kat-keygen-512")
     digest = sha256(signing_key.key_data + verify_key.key_data).hexdigest()
-    assert digest == "8d7e3effadf37640f2b7abe1341089a0baa9b66414ad07d07a652c67c1b8963f"
+    assert digest == "c1558f8589447e89178aca7c390963d8ef291568f19cc2a186615aae9baf9280"
 
 
 def test_seeded_keygen_kat_1024():
     verify_key, signing_key = _key_material_from_seed(LOGN_1024, b"kat-keygen-1024")
     digest = sha256(signing_key.key_data + verify_key.key_data).hexdigest()
-    assert digest == "57077b36fe50ba4960fc4939e71a933313a684084b0e3022fc42440e3c0ba588"
+    assert digest == "56fc26d2600c1eda64ad1a5fe813a1327b9ca17e416c6920d92c0e566c56e1c4"
 
 
 def test_seeded_sign_kat_512():
@@ -82,7 +82,7 @@ def test_seeded_sign_kat_512():
     context = b"kat-context"
     signature = _signature_from_seed(signing_key, message, context, b"kat-sign-seed")
     assert len(signature) == 666
-    assert sha256(signature).hexdigest() == "b57c35d42e3641d49acc8a2d129facab91f9ddc883c76f8e65fcaf6d9d5bfbca"
+    assert sha256(signature).hexdigest() == "d1efbe240c24678344d3831024d10ea3c458dea96f3d74d8a54158d794977c3e"
     assert verify(verify_key, signature, message, context=context) is True
 
 
@@ -92,5 +92,5 @@ def test_seeded_sign_kat_1024():
     context = b"kat-context"
     signature = _signature_from_seed(signing_key, message, context, b"kat-sign-seed")
     assert len(signature) == 1280
-    assert sha256(signature).hexdigest() == "56e1a5f81732e0f7ba88fac29decb6ff108754cda6fcc2231474909e7eb0417c"
+    assert sha256(signature).hexdigest() == "03407af87d9decca145d4504e47e6112d5857d1bf7083d3377c8b9fcabf797f3"
     assert verify(verify_key, signature, message, context=context) is True
