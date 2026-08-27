@@ -15,7 +15,7 @@ from py_fn_dsa import (
 
 def _sign_key_size(logn: int) -> int:
     indicators = sum(logn >= threshold for threshold in (6, 8, 10))
-    return 1 + ((12 - indicators) << (logn - 2))
+    return 65 + ((12 - indicators) << (logn - 2))
 
 
 def _vrfy_key_size(logn: int) -> int:
